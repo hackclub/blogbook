@@ -6,14 +6,15 @@ import Router from "next/router";
 import "@hackclub/theme/fonts/reg-bold.css";
 import theme from "@hackclub/theme";
 import {ThemeProvider} from "theme-ui";
+import LoadingBar from "react-top-loading-bar";
 
 
 const App = ({Component, pageProps}: AppProps) => {
-    const [loading, setLoading] = React.useState(false);
+    let ref = React.useRef(null);
 
     React.useEffect(() => {
-        const start = () => setLoading(true);
-        const end = () => setLoading(false);
+        const start = () => ref.current.continuousStart();
+        const end = () => ref.current.complete();
         Router.events.on("routeChangeStart", start);
         Router.events.on("routeChangeComplete", end);
         Router.events.on("routeChangeError", end);
@@ -28,10 +29,8 @@ const App = ({Component, pageProps}: AppProps) => {
         <>
             {/* @ts-ignore */}
             <ThemeProvider theme={theme}>
-                {loading ? (
-                    <h1>Loading</h1>
-                ) : (<Component {...pageProps} />
-                )}
+                <LoadingBar ref={ref} color={"#ec3750"}/>
+                <Component {...pageProps} />
             </ThemeProvider>
         </>
     );
