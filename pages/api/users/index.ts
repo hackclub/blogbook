@@ -1,18 +1,18 @@
 import type {NextApiRequest, NextApiResponse} from "next";
 
-const getRawPosts = async (max?: number) => {
+const getRawPosts = async (token: string, max?: number) => {
     return await fetch(`https://api.airtable.com/v0/appRNmsIgblo0s4df/main?${max ? `maxRecords=${max}&` : ""}`, {
         method: "get",
         headers: {
-            "Authorization": `Bearer ${process.env.AIRTABLE_TOKEN}`
+            "Authorization": `Bearer ${token}`
         }
     }).then(r => r.json());
 };
 
 const formatUsers = (users) => {
-    if (users.records.length <= 0) return [];
+    if (users.records?.length <= 0) return [];
     let formatted = [];
-    users.records.forEach(record => {
+    users.records?.forEach(record => {
         let i = {
             id: record.id,
             author: record.fields.author,
@@ -27,5 +27,5 @@ const formatUsers = (users) => {
 };
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-    return res.status(200).json(formatUsers(await getRawPosts()));
+    return res.status(200).json(formatUsers(await getRawPosts(req.headers.authorization)));
 };

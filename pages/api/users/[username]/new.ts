@@ -1,6 +1,6 @@
 import type {NextApiRequest, NextApiResponse} from "next";
 
-const createPost = async (author: string, title: string, content: string, time?: string, banner?: string) => {
+const createPost = async (token: string, author: string, title: string, content: string, time?: string, banner?: string) => {
     let body = {
         records: [
             {
@@ -26,14 +26,14 @@ const createPost = async (author: string, title: string, content: string, time?:
         body: JSON.stringify(body),
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${process.env.AIRTABLE_TOKEN}`
+            "Authorization": `Bearer ${token}`
         }
     }).then((res) => res.json());
 };
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
     let {author, title, content} = req.body;
-    let status = await createPost(author, title, content, req.body.time, req.body.banner);
+    let status = await createPost(req.headers.authorization, author, title, content, req.body.time, req.body.banner);
     if (status.error?.type === "AUTHENTICATION_REQUIRED") return res.status(401).json({
         "message": "Not authorized!"
     });
