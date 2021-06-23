@@ -4,7 +4,6 @@ import {useRouter} from "next/router";
 
 const BlogCard = ({title, id}) => {
     const router = useRouter();
-    console.log(id);
     const goToBlog = () => {
         router.push(`/posts/${id}`);
     };
@@ -23,9 +22,6 @@ const BlogCard = ({title, id}) => {
                 }}>
                     {title}
                 </Heading>
-                {/*<Text>*/}
-                {/*    {content}*/}
-                {/*</Text>*/}
             </Card>
         </div>
     );

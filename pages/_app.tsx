@@ -7,6 +7,7 @@ import "@hackclub/theme/fonts/reg-bold.css";
 import theme from "@hackclub/theme";
 import {ThemeProvider} from "theme-ui";
 import LoadingBar from "react-top-loading-bar";
+import Navbar from "../components/Navbar";
 
 
 const App = ({Component, pageProps}: AppProps) => {
