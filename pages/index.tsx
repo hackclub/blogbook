@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import BlogCard from "../components/BlogCard";
 
 import useSWR from "swr";
+import * as React from "react";
 
 function Index({posts}) {
 
@@ -21,26 +22,28 @@ function Index({posts}) {
                 <title>Blogbook - Hack Club</title>
                 <Meta name={"Blogbook"} description={"Fast. Simple. Publish your blogs with ease"}/>
             </Head>
-            <Box as="header" sx={{bg: "sheet", color: "text"}}>
+
+            <Box as="header" sx={{ bg: "sheet", color: "text"}}>
                 <Navbar/>
                 <Container sx={{pt: 3, pb: [3, 4], textAlign: "center"}}>
                     <Heading as={"h1"} variant={"title"} color={"primary"}>
                         Blogbook
                     </Heading>
-                    <Text as={"p"} variant={"subtitle"} mt={3} color={"text"}>
+                    <Heading as={"h2"} variant={"subtitle"} mt={3} color={"text"}>
                         Fast. Simple. Publish blogs with ease.
-                    </Text>
+                    </Heading>
                 </Container>
             </Box>
             {/*// @ts-ignore*/}
             <Box as={"blogs"} sx={{bg: "sheet", alignItems: "center"}}>
                 <Container variant={"container"} sx={{
                     m: "none",
+                    mb: 3,
                     "@media screen and (min-width: 48em)": {
                         maxWidth: "1400px"
                     },
                 }}>
-                    <Grid columns={["1fr", "1fr", "1fr 1fr"]} gap={2} sx={{
+                    <Grid columns={["1fr", "1fr", "1fr", "1fr 1fr"]} gap={2} sx={{
                         justifyItems: "center"
                     }}>
                         {data.map(post => (

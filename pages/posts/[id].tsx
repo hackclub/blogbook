@@ -25,6 +25,7 @@ const Blog = ({post}) => {
                 </Heading>
             </Container>
         </Box>
+        {/*//@ts-ignore*/}
         <Box as={"content"} sx={{"color": "smoke", alignItems: "center"}}>
             <Container sx={{
                 pt: 3,

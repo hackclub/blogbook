@@ -27,5 +27,5 @@ const formatUsers = (users) => {
 };
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-    return res.status(200).json(formatUsers(await getRawPosts(req.headers.authorization)));
+    return res.status(200).json(formatUsers(await getRawPosts(process.env.AIRTABLE_TOKEN)));
 };

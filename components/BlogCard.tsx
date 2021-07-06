@@ -10,13 +10,16 @@ const BlogCard = ({title, id}) => {
 
     return (
         <div>
-            <Card variant={"primary"} key={"primary"} mt={3} p={[3, 4]} mx={[3, 4]} sx={{
+            {/*//@ts-ignore*/}
+            <Card shadow={"elevated"} variant={"primary"} key={"primary"} mt={3} p={[3, 4]} mx={[3, 4]} sx={{
                 display: "flex",
                 "flexDirection": "column",
-                width: ["325px", "600px"]
+                width: ["325px", "600px"],
+                cursor: "pointer",
             }} onClick={goToBlog}>
-                <Heading as={"h1"} variant={"headline"} sx={{
+                <Heading as={"h1"} sx={{
                     "white-space": "nowrap",
+                    fontSize: [3, 4, 4],
                     overflow: "hidden",
                     textOverflow: "ellipsis"
                 }}>

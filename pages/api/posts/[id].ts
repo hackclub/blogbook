@@ -6,7 +6,7 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
     let data = await fetch(`https://api.airtable.com/v0/appRNmsIgblo0s4df/main/${id}`, {
         method: "GET",
         headers: {
-            "Authorization": `Bearer ${req.headers.authorization}`
+            "Authorization": `Bearer ${process.env.AIRTABLE_TOKEN}`
         }
     }).then(r => r.json());
     return res.status(200).json(data);
